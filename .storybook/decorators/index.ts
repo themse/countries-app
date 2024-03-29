@@ -1,0 +1,1 @@
+export { withFontLoaded } from './withFontLoaded';
