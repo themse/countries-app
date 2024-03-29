@@ -1,10 +1,11 @@
+import { Container } from '@/ui/components/templates/Container';
 import { PageProps } from '@/types/app';
 
 export default function Home({}: PageProps) {
 	return (
-		<div>
+		<Container>
 			<p className="font-inter">Hello World</p>
 			<p>Hello World</p>
-		</div>
+		</Container>
 	);
 }
