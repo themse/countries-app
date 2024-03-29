@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { Container } from '@/ui/components/templates/Container';
 import { PageProps } from '@/types/app';
 

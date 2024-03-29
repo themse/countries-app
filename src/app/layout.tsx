@@ -1,3 +1,4 @@
+import 'server-only';
 import type { Metadata } from 'next';
 
 import { META_DESCRIPTION, META_TITLE } from '@/common/configs/app';
