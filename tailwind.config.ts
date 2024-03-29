@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 
 const config: Config = {
 	content: ['./src/app/**/*.{ts,tsx,mdx}', './src/ui/**/*.{ts,tsx,mdx}'],
@@ -13,6 +14,10 @@ const config: Config = {
 			md: '992px',
 			lg: '1200px',
 			xl: '1400px',
+		},
+		fontFamily: {
+			inter: ['var(--font-inter)', ...fontFamily.sans],
+			'roboto-mono': ['var(--font-roboto-mono)', ...fontFamily.sans],
 		},
 	},
 	plugins: [],
