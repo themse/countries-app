@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const containerVariants = tv({
-	base: 'px-6',
+	base: 'w-full px-6',
 	variants: {
 		variant: {
 			basic: 'container',

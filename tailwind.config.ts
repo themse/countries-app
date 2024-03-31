@@ -17,8 +17,8 @@ const config: Config = {
 			xl: '1400px',
 		},
 		fontFamily: {
-			inter: ['var(--font-inter)', ...fontFamily.sans],
-			'roboto-mono': ['var(--font-roboto-mono)', ...fontFamily.sans],
+			'open-sans': ['var(--font-open-sans)', ...fontFamily.sans],
+			roboto: ['var(--font-roboto)', ...fontFamily.sans],
 		},
 	},
 	plugins: [],

@@ -1,10 +1,10 @@
 import { type Decorator } from '@storybook/react';
 
-import { inter, robotoMono } from '@/ui/fonts';
+import { openSans, roboto } from '@/ui/fonts';
 
 export const withFontLoaded: Decorator = (Story) => (
-	<div className={`${inter.variable} ${robotoMono.variable}`}>
-		<div className="font-roboto-mono">
+	<div className={`${openSans.variable} ${roboto.variable}`}>
+		<div className="font-roboto">
 			<Story />
 		</div>
 	</div>

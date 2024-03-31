@@ -6,3 +6,5 @@ export enum APP_THEME {
 	Dark = 'dark',
 	Light = 'light',
 }
+
+export const APP_BRAND_NAME = 'Where in the world?';

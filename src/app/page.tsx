@@ -6,7 +6,7 @@ import { PageProps } from '@/types/app';
 export default function Home({}: PageProps) {
 	return (
 		<Container>
-			<p className="font-inter">Hello World</p>
+			<h2>Hello World</h2>
 			<p>Hello World</p>
 		</Container>
 	);
