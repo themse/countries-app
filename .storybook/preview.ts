@@ -13,6 +13,11 @@ const preview: Preview = {
 			},
 		},
 		layout: 'centered',
+		options: {
+			storySort: {
+				order: ['General', 'UI', ['Atoms', 'Molecules', 'Organisms', 'Templates'], '*', 'WIP'],
+			},
+		},
 	},
 	decorators: [withFontLoaded, withTheme],
 };
