@@ -12,11 +12,11 @@ export const Header = ({ title }: Props) => {
 	return (
 		<div className="flex min-h-20 w-full items-center bg-white py-2 shadow-lg shadow-black/20 dark:bg-gray-700">
 			<Container>
-				<div className="flex justify-between gap-x-2">
+				<div className="flex items-center justify-between gap-x-2">
 					<Brand>
 						<Link href="/">{title}</Link>
 					</Brand>
-					<ThemeToggle />
+					<ThemeToggle showLabel />
 				</div>
 			</Container>
 		</div>
