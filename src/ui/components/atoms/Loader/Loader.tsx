@@ -7,11 +7,15 @@ const loaderVariants = tv({
 	},
 });
 
-export const Loader = () => {
+type Props = {
+	className?: string;
+};
+
+export const Loader = ({ className }: Props) => {
 	const { wrapper, item } = loaderVariants();
 
 	return (
-		<div className={wrapper()}>
+		<div className={wrapper({ className })}>
 			<div className={item()} />
 			<div className={item()} />
 			<div className={item()} />
