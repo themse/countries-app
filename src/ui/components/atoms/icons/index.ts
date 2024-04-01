@@ -1,1 +1,1 @@
-export { SunIcon, MoonIcon, MoveLeftIcon, SearchIcon } from 'lucide-react';
+export { SunIcon, MoonIcon, MoveLeftIcon, SearchIcon, ChevronDown } from 'lucide-react';

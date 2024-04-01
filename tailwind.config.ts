@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
+import twAnimate from 'tailwindcss-animate';
 
 const config: Config = {
 	darkMode: 'class',
@@ -21,6 +22,6 @@ const config: Config = {
 			roboto: ['var(--font-roboto)', ...fontFamily.sans],
 		},
 	},
-	plugins: [],
+	plugins: [twAnimate],
 };
 export default config;
