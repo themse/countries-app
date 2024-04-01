@@ -23,7 +23,7 @@ export const getAllCountries = async (criteria: Partial<{ search: string; region
 
 	// Filters
 	const { search, region } = criteria;
-	let filteredData = data;
+	let filteredData = [...data];
 
 	if (search) {
 		filteredData = filterBy<CountryItem, 'name'>(filteredData, 'name', search);
