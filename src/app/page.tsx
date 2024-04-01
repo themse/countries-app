@@ -11,7 +11,9 @@ export default function Home({ searchParams }: PageProps) {
 	return (
 		<Container>
 			<div className="flex flex-col gap-y-8 py-16">
-				<Toolbar />
+				<Suspense fallback={<Loader />}>
+					<Toolbar />
+				</Suspense>
 				<Suspense fallback={<Loader />}>
 					<CountryList filterCriteria={searchParams} />
 				</Suspense>
