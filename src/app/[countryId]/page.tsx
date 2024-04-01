@@ -23,7 +23,7 @@ export default async function Country({ params }: PageProps<{ countryId: string 
 					</Link>
 				</Button>
 
-				<Suspense fallback={<Loader />}>
+				<Suspense fallback={<Loader className="fixed bottom-0 left-0 right-0 top-0 h-screen" />}>
 					<CountryDetails countryName={revertSlug(countryId)} />
 				</Suspense>
 			</div>
