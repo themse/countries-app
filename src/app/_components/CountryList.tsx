@@ -10,7 +10,7 @@ export const CountryList = async () => {
 	return (
 		<div className="grid gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-14">
 			{countries.map((country) => (
-				<Link href={`/${country.name}`} key={country.name}>
+				<Link href={`/${country.slug}`} key={country.name}>
 					<Card image={country.flagImg.src} title={country.name} className="h-full">
 						<DescriptionList
 							list={[
