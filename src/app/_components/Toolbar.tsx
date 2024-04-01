@@ -18,22 +18,18 @@ type Props = {
 };
 
 export const Toolbar = ({ regionListPromise }: Props) => {
+	const inputRef = useRef<ElementRef<'input'>>(null);
+
 	const regionList = use(regionListPromise);
 
+	// Routing
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
-
-	const inputRef = useRef<ElementRef<'input'>>(null);
-
 	const createQueryStringNext = useCallback(createQueryString, [searchParams]);
 
-	const handleSearch = (value: string) => {
-		router.push(`${pathname}?${createQueryStringNext(searchParams, { name: 'search', value })}`);
-	};
-
-	const handleRegionSelect = (value: string) => {
-		router.push(`${pathname}?${createQueryStringNext(searchParams, { name: 'region', value })}`);
+	const changeSearchParams = (fieldName: 'search' | 'region', value: string) => {
+		router.push(`${pathname}?${createQueryStringNext(searchParams, { name: fieldName, value })}`);
 	};
 
 	useEffect(() => {
@@ -53,11 +49,11 @@ export const Toolbar = ({ regionListPromise }: Props) => {
 				ref={inputRef}
 				inputProps={{
 					placeholder: 'Search for a country...',
-					onChange: (event) => handleSearch(event.target.value),
+					onChange: (event) => changeSearchParams('search', event.target.value),
 				}}
 			/>
 
-			<Select onValueChange={handleRegionSelect}>
+			<Select onValueChange={(value) => changeSearchParams('region', value)}>
 				<SelectTrigger className="w-64">
 					<SelectValue placeholder="Filter by Region" />
 				</SelectTrigger>
