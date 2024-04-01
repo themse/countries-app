@@ -7,13 +7,13 @@ import { PageProps } from '@/types/app';
 import { Toolbar } from './_components/Toolbar';
 import { CountryList } from './_components/CountryList';
 
-export default function Home({}: PageProps) {
+export default function Home({ searchParams }: PageProps) {
 	return (
 		<Container>
 			<div className="flex flex-col gap-y-8 py-16">
 				<Toolbar />
 				<Suspense fallback={<Loader />}>
-					<CountryList />
+					<CountryList filterCriteria={searchParams} />
 				</Suspense>
 			</div>
 		</Container>

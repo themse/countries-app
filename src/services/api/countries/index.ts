@@ -8,7 +8,7 @@ import { CountryAdapter } from './CountryAdapter';
 
 const BASE_URL = 'https://restcountries.com/v3.1';
 
-export const getAllCountries = async () => {
+export const getAllCountries = async (criteria: Partial<{ search: string }>) => {
 	const searchFields = ['name', 'population', 'region', 'capital', 'flags'];
 
 	const apiUrl = `${BASE_URL}/all?fields=${searchFields.join(',')}`;
@@ -20,7 +20,17 @@ export const getAllCountries = async () => {
 		Adapter.from(item).to((item) => new CountryAdapter(item).adaptItem()),
 	);
 
-	return data;
+	// Filter
+	const { search } = criteria;
+	let filteredData = data;
+
+	if (search) {
+		filteredData = filteredData.filter((item) =>
+			item.name.toLowerCase().includes(search.toLowerCase()),
+		);
+	}
+
+	return filteredData;
 };
 
 export const getCountriesByCodes = async ({ codes }: { codes: string[] }) => {

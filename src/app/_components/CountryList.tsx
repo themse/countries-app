@@ -4,8 +4,14 @@ import { getAllCountries } from '@/services/api/countries';
 import { Card } from '@/ui/components/molecules/Card';
 import { DescriptionList } from '@/ui/components/molecules/DescriptionList';
 
-export const CountryList = async () => {
-	const countries = await getAllCountries();
+type Props = {
+	filterCriteria: Partial<{
+		search: string;
+	}>;
+};
+
+export const CountryList = async ({ filterCriteria }: Props) => {
+	const countries = await getAllCountries(filterCriteria);
 
 	return (
 		<div className="grid gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-14">
