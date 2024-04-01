@@ -29,3 +29,23 @@ export type RawCountry = {
 		alt: string;
 	};
 };
+
+export type Country = {
+	name: string;
+	slug: string;
+	nativeName: string;
+	population: string;
+	region: string;
+	subregion: string;
+	capital: string;
+	topLevelDomain: string;
+	currencies: string;
+	languages: string;
+	borders: Pick<Country, 'name' | 'slug'>[];
+	flagImg: { src: string; alt: string };
+};
+
+export type CountryItem = Pick<
+	Country,
+	'name' | 'slug' | 'population' | 'region' | 'capital' | 'flagImg'
+>;

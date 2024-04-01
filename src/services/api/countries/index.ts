@@ -17,13 +17,24 @@ export const getAllCountries = async () => {
 	const rawData = (await response.json()) as RawCountry[];
 
 	const data = rawData.map((item) =>
-		Adapter.from(item).to((item) => new CountryAdapter(item).adaptList()),
+		Adapter.from(item).to((item) => new CountryAdapter(item).adaptItem()),
 	);
 
 	return data;
 };
 
-export const getCountryByName = async (name: string) => {
+export const getCountriesByCodes = async ({ codes }: { codes: string[] }) => {
+	const searchFields = ['name'];
+
+	const apiUrl = `${BASE_URL}/alpha/?codes=${codes.join(',')}&fields=${searchFields.join(',')}`;
+
+	const response = await fetch(apiUrl, { cache: 'force-cache' });
+	const data = (await response.json()) as RawCountry[];
+
+	return data;
+};
+
+export const getCountryByName = async ({ name }: { name: string }) => {
 	const searchFields = [
 		'name',
 		'tld',
@@ -40,8 +51,22 @@ export const getCountryByName = async (name: string) => {
 
 	const apiUrl = `${BASE_URL}/name/${name}?fields=${searchFields.join(',')}`;
 
-	const response = await fetch(apiUrl);
-	const data = await response.json();
+	const response = await fetch(apiUrl, { cache: 'force-cache' });
+	const [rawData] = (await response.json()) as RawCountry[];
+
+	if (!rawData) {
+		return null; // TODO refine
+	}
+
+	const rawBorders =
+		rawData.borders.length > 0 ? await getCountriesByCodes({ codes: rawData.borders }) : [];
+
+	const data = Adapter.from(rawData).to((item) => new CountryAdapter(item).adaptDetail());
+	const borders = rawBorders.map((item) =>
+		Adapter.from(item).to((item) => new CountryAdapter(item).adaptBorders()),
+	);
+
+	data.borders = borders;
 
 	return data;
 };

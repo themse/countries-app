@@ -2,8 +2,8 @@ import { tv, VariantProps } from 'tailwind-variants';
 
 const descriptionListVariants = tv({
 	slots: {
-		wrapper: 'text-sm leading-6',
-		item: 'grid grid-cols-2 gap-4',
+		wrapper: 'text-sm leading-5',
+		item: 'grid grid-cols-2 gap-4 py-px',
 		label: 'font-bold',
 		value: 'opacity-80',
 	},
