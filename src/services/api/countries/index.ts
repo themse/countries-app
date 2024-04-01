@@ -3,7 +3,8 @@
 import 'server-only';
 
 import { Adapter } from '@/services/Adapter';
-import { RawCountry } from './types';
+import { filterBy } from '@/utils/filterBy';
+import { CountryItem, RawCountry } from './types';
 import { CountryAdapter } from './CountryAdapter';
 
 const BASE_URL = 'https://restcountries.com/v3.1';
@@ -21,21 +22,14 @@ export const getAllCountries = async (criteria: Partial<{ search: string; region
 	);
 
 	// Filters
-	// 1. Search
 	const { search, region } = criteria;
 	let filteredData = data;
 
 	if (search) {
-		filteredData = filteredData.filter((item) =>
-			item.name.toLowerCase().includes(search.toLowerCase()),
-		);
+		filteredData = filterBy<CountryItem, 'name'>(filteredData, 'name', search);
 	}
-
-	// 2. Region
 	if (region) {
-		filteredData = filteredData.filter((item) =>
-			item.region.toLowerCase().includes(region.toLowerCase()),
-		);
+		filteredData = filterBy<CountryItem, 'region'>(filteredData, 'region', region);
 	}
 
 	return filteredData;
