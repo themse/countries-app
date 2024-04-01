@@ -7,6 +7,7 @@ import { DescriptionList } from '@/ui/components/molecules/DescriptionList';
 type Props = {
 	filterCriteria: Partial<{
 		search: string;
+		region: string;
 	}>;
 };
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { ElementRef, useCallback, useEffect, useRef } from 'react';
+import { ElementRef, useCallback, useEffect, useRef, use } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 
 import { Input } from '@/ui/components/atoms/Input';
@@ -14,31 +14,13 @@ import {
 } from '@/ui/components/molecules/Select';
 import { createQueryString } from '@/utils/createQueryString';
 
-// TODO use fetched data
-const mockedData = [
-	{
-		label: 'Africa',
-		value: 'africa',
-	},
-	{
-		label: 'America',
-		value: 'america',
-	},
-	{
-		label: 'Asia',
-		value: 'Asia',
-	},
-	{
-		label: 'Europe',
-		value: 'europe',
-	},
-	{
-		label: 'Oceania',
-		value: 'oceania',
-	},
-];
+type Props = {
+	regionListPromise: Promise<string[]>;
+};
 
-export const Toolbar = () => {
+export const Toolbar = ({ regionListPromise }: Props) => {
+	const regionList = use(regionListPromise);
+
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
@@ -49,6 +31,10 @@ export const Toolbar = () => {
 
 	const handleSearch = (value: string) => {
 		router.push(`${pathname}?${createQueryStringNext(searchParams, { name: 'search', value })}`);
+	};
+
+	const handleRegionSelect = (value: string) => {
+		router.push(`${pathname}?${createQueryStringNext(searchParams, { name: 'region', value })}`);
 	};
 
 	useEffect(() => {
@@ -74,13 +60,13 @@ export const Toolbar = () => {
 				/>
 			</div>
 
-			<Select>
+			<Select onValueChange={handleRegionSelect}>
 				<SelectTrigger className="w-64">
 					<SelectValue placeholder="Filter by Region" />
 				</SelectTrigger>
 				<SelectContent className="w-64">
-					{mockedData.map(({ label, value }) => (
-						<SelectItem value={value} key={value}>
+					{regionList.map((label) => (
+						<SelectItem value={label.toLowerCase()} key={label}>
 							{label}
 						</SelectItem>
 					))}

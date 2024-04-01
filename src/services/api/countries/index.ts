@@ -8,7 +8,7 @@ import { CountryAdapter } from './CountryAdapter';
 
 const BASE_URL = 'https://restcountries.com/v3.1';
 
-export const getAllCountries = async (criteria: Partial<{ search: string }>) => {
+export const getAllCountries = async (criteria: Partial<{ search: string; region: string }>) => {
 	const searchFields = ['name', 'population', 'region', 'capital', 'flags'];
 
 	const apiUrl = `${BASE_URL}/all?fields=${searchFields.join(',')}`;
@@ -20,13 +20,21 @@ export const getAllCountries = async (criteria: Partial<{ search: string }>) => 
 		Adapter.from(item).to((item) => new CountryAdapter(item).adaptItem()),
 	);
 
-	// Filter
-	const { search } = criteria;
+	// Filters
+	// 1. Search
+	const { search, region } = criteria;
 	let filteredData = data;
 
 	if (search) {
 		filteredData = filteredData.filter((item) =>
 			item.name.toLowerCase().includes(search.toLowerCase()),
+		);
+	}
+
+	// 2. Region
+	if (region) {
+		filteredData = filteredData.filter((item) =>
+			item.region.toLowerCase().includes(region.toLowerCase()),
 		);
 	}
 
@@ -40,6 +48,19 @@ export const getCountriesByCodes = async ({ codes }: { codes: string[] }) => {
 
 	const response = await fetch(apiUrl, { cache: 'force-cache' });
 	const data = (await response.json()) as RawCountry[];
+
+	return data;
+};
+
+export const getAllRegions = async () => {
+	const searchFields = ['region'];
+
+	const apiUrl = `${BASE_URL}/all?fields=${searchFields.join(',')}`;
+
+	const response = await fetch(apiUrl, { cache: 'force-cache' });
+	const rawData = (await response.json()) as RawCountry[];
+
+	const data = [...new Set(rawData.map((item) => item.region))].toSorted();
 
 	return data;
 };
@@ -79,8 +100,4 @@ export const getCountryByName = async ({ name }: { name: string }) => {
 	data.borders = borders;
 
 	return data;
-};
-
-export const findCountryByRegion = async () => {
-	// TODO implement
 };
