@@ -5,8 +5,9 @@ export type PageProps<TParams = void> = Readonly<{
 	searchParams: Record<string, string | string[] | undefined>;
 }>;
 
-export type LayoutProps<TParams = void> = Readonly<
+export type LayoutProps<TParams = void, TParallelRoutes = void> = Readonly<
 	PropsWithChildren<{
 		params: TParams;
-	}>
+	}> &
+		TParallelRoutes
 >;
