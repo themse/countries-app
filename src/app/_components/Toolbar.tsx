@@ -3,8 +3,6 @@
 import { ElementRef, useCallback, useEffect, useRef, use } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 
-import { Input } from '@/ui/components/atoms/Input';
-import { SearchIcon } from '@/ui/components/atoms/icons';
 import {
 	Select,
 	SelectContent,
@@ -13,6 +11,7 @@ import {
 	SelectValue,
 } from '@/ui/components/molecules/Select';
 import { createQueryString } from '@/utils/createQueryString';
+import { SearchInput } from '@/ui/components/molecules/SearchInput';
 
 type Props = {
 	regionListPromise: Promise<string[]>;
@@ -49,16 +48,14 @@ export const Toolbar = ({ regionListPromise }: Props) => {
 
 	return (
 		<div className="flex flex-col justify-between gap-x-2 gap-y-8 sm:flex-row">
-			<div className="relative w-full sm:w-1/2 md:w-1/3">
-				<SearchIcon className="absolute left-6 top-1/2 h-5 w-5 -translate-y-1/2 opacity-40" />
-				<Input
-					ref={inputRef}
-					type="text"
-					className="pl-16"
-					placeholder="Search for a country..."
-					onChange={(event) => handleSearch(event.target.value)}
-				/>
-			</div>
+			<SearchInput
+				className="sm:w-1/2 md:w-1/3"
+				ref={inputRef}
+				inputProps={{
+					placeholder: 'Search for a country...',
+					onChange: (event) => handleSearch(event.target.value),
+				}}
+			/>
 
 			<Select onValueChange={handleRegionSelect}>
 				<SelectTrigger className="w-64">

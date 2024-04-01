@@ -28,13 +28,4 @@ export const Disabled: Story = {
 	},
 };
 
-export const SearchInput: Story = {
-	render: (args) => (
-		<div className="relative">
-			<SearchIcon className="absolute left-6 top-1/2 h-5 w-5 -translate-y-1/2 opacity-40" />
-			<Input {...args} type="text" className="pl-16" />
-		</div>
-	),
-};
-
 export default meta;
